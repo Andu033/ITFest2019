@@ -1,16 +1,12 @@
 package com.satrabench.getfriends.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
-<<<<<<< HEAD
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-=======
->>>>>>> origin/master
+import java.util.Map;
 
 @Entity
 @Data
@@ -27,12 +23,10 @@ public class User {
 
 	private String name;
 
-<<<<<<< HEAD
-	private String password;;
-=======
 	private String password;
 
-	private boolean isAdmin;
+	@ElementCollection
+	private List<String> skills = new ArrayList<>();
 
->>>>>>> origin/master
+	private boolean isAdmin;
 }

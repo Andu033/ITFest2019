@@ -50,13 +50,4 @@ public class EventController {
         return eventService.getById(id);
     }
 
-//    @PostMapping("/user/putuserinevent")
-//    public ResponseEntity<Object> putUserInEvent(Event event,User user){
-//
-//    }
-
-    //un id de user
-    //fac endpoint primeste ca pathvariable :id user si numele skilului si il adauga la user si salv in database
-    //id ul unui user si
-    //return evenimente disponibile,cu skillurile unui user,stergi un eveniment
 }
