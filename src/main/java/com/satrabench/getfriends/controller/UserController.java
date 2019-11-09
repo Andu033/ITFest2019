@@ -52,5 +52,14 @@ public class UserController {
         return userService.addSkills(id, skillName, skillLevel);
     }
 
+	@GetMapping("/users/seachbyname")
+	public ResponseEntity<Object> GetOneByName(String name) {
+		return userService.SearchOneByName(name);
+	}
+
+	@GetMapping("/users/getalladmins")
+	public ResponseEntity<Object> GetAllByIsAdmin() {
+		return userService.SearchAllbyIsAdmin();
+	}
 
 }

@@ -1,7 +1,9 @@
 package com.satrabench.getfriends.service;
 
 import com.satrabench.getfriends.model.Event;
+import com.satrabench.getfriends.model.User;
 import com.satrabench.getfriends.repository.EventRepository;
+import com.satrabench.getfriends.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,27 +18,30 @@ public class EventService {
 
 
     private final EventRepository eventRepository;
+    private final UserRepository userRepository;
+
 
     @Autowired
-    public EventService(EventRepository eventRepository) {
+    public EventService(EventRepository eventRepository, UserRepository userRepository) {
         this.eventRepository = eventRepository;
+        this.userRepository = userRepository;
     }
 
     public ResponseEntity<Object> getAllByOpenTrue() {
         List<Event> list = new ArrayList<>();
-        for(Event event:eventRepository.findAll()){
-            if(event.isOpen()){
+        for (Event event : eventRepository.findAll()) {
+            if (event.isOpen()) {
                 list.add(event);
             }
         }
-        return new ResponseEntity<Object>(list,HttpStatus.OK);
+        return new ResponseEntity<Object>(list, HttpStatus.OK);
     }
 
     public ResponseEntity<Object> getAllEventsWithSomeSkills(List<String> skills) {
         int contor = 0;
         List<Event> list = new ArrayList<>();
-        for(Event e:eventRepository.findAll()){
-            for(String i:skills) {
+        for (Event e : eventRepository.findAll()) {
+            for (String i : skills) {
                 for (String j : e.getSkillsRequired()) {
                     if (j.equals(i)) {
                         contor++;
@@ -80,5 +85,28 @@ public class EventService {
         return new ResponseEntity<Object>(eventRepository.findById(id), HttpStatus.OK);
     }
 
-}
+    public ResponseEntity<Object> insertUserInEvent(int id,User user) {
+        for (Event e : eventRepository.findAll()) {
 
+            if (e.getId() == id) {
+                user.getEventsParticipating().add(id);
+                e.getListOfUsers().add(user.getId());
+                eventRepository.save(e);
+                userRepository.save(user);
+                break;
+            }
+        }
+        return new ResponseEntity<Object>(eventRepository.findById(id),HttpStatus.OK);
+    }
+
+    //primes idul unui user si returenez  lista de venimebnte
+    public ResponseEntity<Object> returnEventsListFofUser(int idUser){
+        List<Event> list = new ArrayList<>();
+        for(Event e:eventRepository.findAll()){
+            if(e.getListOfUsers().contains(idUser)){
+                list.add(e);
+            }
+        }
+        return new ResponseEntity<Object>(list,HttpStatus.OK);
+    }
+}

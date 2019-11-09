@@ -23,10 +23,17 @@ public class User {
 
 	private String name;
 
+	@ElementCollection
+	private List<Integer> eventsParticipating;
+
 	private String password;
 
 	@ElementCollection
 	private List<String> skills = new ArrayList<>();
 
 	private boolean isAdmin;
+
+	public void addEventToUser(int id){
+		eventsParticipating.add(id);
+	}
 }

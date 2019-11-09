@@ -34,8 +34,8 @@ public class Event {
     private Date dateWhenEventStarts;
 
     private Date dateWhenEventEnds;
-
-    private List<User> listOfUsers = new ArrayList<>();
+    @ElementCollection
+    private List<Integer> listOfUsers = new ArrayList<>();
 
     private int nrOfPeople;
 
@@ -46,4 +46,9 @@ public class Event {
         else
             return false;
     }
+
+    public void addUserToEvent(int id){
+        listOfUsers.add(id);
+    }
+
 }
