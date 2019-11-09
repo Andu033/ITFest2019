@@ -6,11 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-<<<<<<< HEAD
-import java.util.ArrayList;
 import java.util.List;
-=======
->>>>>>> origin/master
 
 @Entity
 @Data
@@ -27,12 +23,14 @@ public class User {
 
 	private String name;
 
-<<<<<<< HEAD
-	private String password;;
-=======
+	@ElementCollection
+	private List<Integer> eventsParticipating;
+
 	private String password;
 
 	private boolean isAdmin;
 
->>>>>>> origin/master
+	public void addEventToUser(int id){
+		eventsParticipating.add(id);
+	}
 }

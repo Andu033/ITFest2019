@@ -8,6 +8,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class UserService {
 	private final UserRepository userRepository;
@@ -34,5 +37,17 @@ public class UserService {
 		return new ResponseEntity<Object>(userRepository.findOneByEmail(email), HttpStatus.OK);
 	}
 
+	public ResponseEntity<Object> SearchOneByName(String name) {
+		return new ResponseEntity<Object>(userRepository.findOneByName(name), HttpStatus.OK);
+	}
 
+	public ResponseEntity<Object> SearchAllbyIsAdmin() {
+		List<User> list =new ArrayList<>();
+    	for(User user:userRepository.findAll()){
+    		if(user.isAdmin()){
+				list.add(user);
+			}
+		}
+		return new ResponseEntity<Object>(list, HttpStatus.OK);
+	}
 }

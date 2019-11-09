@@ -40,5 +40,14 @@ public class UserController {
 		return userService.externAuthentication(email);
 	}
 
+	@GetMapping("/users/seachbyname")
+	public ResponseEntity<Object> GetOneByName(String name) {
+		return userService.SearchOneByName(name);
+	}
+
+	@GetMapping("/users/getalladmins")
+	public ResponseEntity<Object> GetAllByIsAdmin() {
+		return userService.SearchAllbyIsAdmin();
+	}
 
 }
