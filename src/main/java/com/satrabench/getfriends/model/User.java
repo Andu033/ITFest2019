@@ -6,8 +6,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.List;
+=======
+>>>>>>> origin/master
 
 @Entity
 @Data
@@ -19,9 +22,17 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int Id;
 
+	//@Column(unique=true)
 	private String email;
 
 	private String name;
 
+<<<<<<< HEAD
 	private String password;;
+=======
+	private String password;
+
+	private boolean isAdmin;
+
+>>>>>>> origin/master
 }
